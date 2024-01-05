@@ -98,7 +98,7 @@ const searchImg = () => {
         captionType: 'attr',
         captionsData: 'alt',
       });
-      gallery.refresh();
+      lightbox.refresh();
     })
     .catch(error => {
       console.log(error);
