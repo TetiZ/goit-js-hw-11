@@ -15,8 +15,8 @@ const gallery = document.querySelector('.gallery');
 // spinner
 
 const loader = document.querySelector('.loader');
-const showLoader = () => (loader.dataset.loading = 'true');
-const hideLoader = () => (loader.dataset.loading = 'false');
+const showLoader = () => loader.classList.add('active');
+const hideLoader = () => loader.classList.remove('active');
 
 // Pixabay
 // HTTP - запити;
@@ -57,20 +57,37 @@ const searchImg = () => {
           .map(
             hit => `
               
+              <li class="gallery-item">
                 <a class="gallery-link" href=${hit.largeImageURL}>
-                  <img
-                    class="gallery-image"
-                    src=${hit.webformatURL}
-                    alt=${hit.tags}
-                  />
-                
-                <div class="img-info-wrapper">
-                  <p class="img-info">Likes: ${hit.likes}</p>
-                  <p class="img-info">Views: ${hit.views}</p>
-                  <p class="img-info">Comments: ${hit.comments}</p>
-                  <p class="img-info">Downloads: ${hit.downloads}</p>
-                </div>
+                    <img
+                      class="gallery-image"
+                      src=${hit.webformatURL}
+                      alt=${hit.tags}
+                    />
+                  
+                  <div class="img-info-wrapper">
+                    <div class="img-part-info-wrapper">
+                    <h3 class="img-info-title">Likes</h3>
+                      <p class="img-info">${hit.likes}</p>
+                    </div>
+  
+                    <div class="img-part-info-wrapper">
+                    <h3 class="img-info-title">Views</h3>
+                      <p class="img-info">${hit.views}</p>
+                    </div>
+  
+                    <div class="img-part-info-wrapper">
+                    <h3 class="img-info-title">Comments</h3>
+                      <p class="img-info">${hit.comments}</p>
+                    </div>
+  
+                    <div class="img-part-info-wrapper">
+                    <h3 class="img-info-title">Downloads</h3>
+                      <p class="img-info">${hit.downloads}</p>
+                    </div>
+                  </div>
               </a>
+            </li>
             `
           )
           .join('');
@@ -78,6 +95,7 @@ const searchImg = () => {
 
       let lightbox = new SimpleLightbox('.gallery a', {
         captionDelay: 250,
+        captionType: 'attr',
         captionsData: 'alt',
       });
       gallery.refresh();
