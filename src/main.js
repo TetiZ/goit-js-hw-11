@@ -97,6 +97,7 @@ const searchImg = () => {
         captionDelay: 250,
         captionType: 'attr',
         captionsData: 'alt',
+        position: 'topRight',
       });
       lightbox.refresh();
     })
@@ -108,6 +109,7 @@ const searchImg = () => {
 
 const submitHandler = e => {
   e.preventDefault();
+  gallery.innerHTML = '';
   searchImg();
   form.reset();
 };
